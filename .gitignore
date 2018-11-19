@@ -1,6 +1,7 @@
 /bower_components
 /node_modules
-/dist
 openNote.bundle.*
 openNote.appcache
 webpack_files
+
+# /dist

@@ -1,0 +1,46 @@
+version: '3.6'
+services:
+
+    opennote:
+        # image: foxusa/opennote
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        volumes:
+            -   ./cert:/root/certs:ro #TODO set this
+        ports:
+            -   "6201:80"
+            # -   "6202:443"
+            # -   "6205:5984" # ?? will this work?? CouchDB Proxy NO SSL
+            # -   "6206:6984" # CouchDB Proxy SSL
+        links:
+            - "couchdb:couchdb"
+
+    couchdb:
+        image: couchdb
+        volumes:
+              # - .:/bag                                   # folder for scripts, etc.
+              - ../data/home407/:/home                  # folder for exported data, etc.
+              - ../data/couch407/:/opt/couchdb/data     #TODO set this
+              - ./cert:/root/certs:ro    #TODO set this
+        ports:
+            -   "6204:5984" # no ssl
+            # -   "5984" # no ssl
+            # -   "6984"
+        environment:
+            COUCHDB_USER: usera
+            COUCHDB_PASSWORD: userap
+
+    minio:
+        image: minio/minio
+        volumes:
+            -   ../data/minio407/:/data  #TODO set this
+            -   ./cert:/root/.minio/certs #TODO set this
+        ports:
+            -   "9000"
+        environment:
+            MINIO_ACCESS_KEY: tests   #TODO set this
+            MINIO_SECRET_KEY: testssdfasdf  #TODO set this
+        command: server /data 
+
+ 

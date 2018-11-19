@@ -12,8 +12,11 @@ var serverConfig = function(keepalive){
     return {
         options: {
             port: 8080,
+            hostname: '0.0.0.0',
             base: ".",
-            keepalive: keepalive
+            keepalive: keepalive,
+            livereload: true,
+            useAvailablePort: true
         }
     };
 };

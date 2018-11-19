@@ -41,7 +41,7 @@
   "scripts": {
     "test": "testcafe chrome ./test/e2e/test.js --skip-js-errors -c 3",
     "testSingle": "testcafe chrome ./test/e2e/test.js --skip-js-errors",
-    "dev": "webpack-dev-server --open --hot --config ./build/webpack.dev.config.js",
+    "dev": "webpack-dev-server --open --hot --config  ./build/webpack.dev.config.js  --host 0.0.0.0 --public --disable-host-check ",
     "build": "webpack --progress --hide-modules --config ./build/webpack.prod.config.js"
   }
 }
