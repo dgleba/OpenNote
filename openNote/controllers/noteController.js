@@ -224,6 +224,9 @@ openNote.controller("noteController", ["$scope",
             $scope.note._id = null;
             $scope.note.parentFolderID = $location.search().folderID;
             $scope.note.title = "Note Title";
+            var dgcreated = new Date();
+            $scope.note.dgcreated = dgcreated.toISOString();
+            $scope.note.dgupdated = dgcreated.toISOString();
 
             activateEditMode();
             $(".notePartial").fadeIn(config.fadeSpeedLong());
@@ -235,6 +238,9 @@ openNote.controller("noteController", ["$scope",
                 $scope.note = doc;
                 $scope.noteHTML = marked($scope.note.note);
                 $(".notePartial").fadeIn(config.fadeSpeedLong());
+                // $scope.note.dgupdated = "test555";
+                var dgts = new Date();
+                $scope.note.dgupdated = dgts.toISOString();
 
                 //Add buttons
                 $rootScope.buttons.push(upButton($scope.note.parentFolderID));
